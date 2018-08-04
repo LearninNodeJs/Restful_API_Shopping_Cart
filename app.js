@@ -19,7 +19,7 @@ app.use(function(req,res,next){
 
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
-mongoose.connect('mongodb+srv://admin:wamatu@restapi-kvyex.mongodb.net/test?retryWrites=true',
+mongoose.connect('mongodb+srv://admin:wamatu@restapi-kvyex.mongodb.net/ShopApi?retryWrites=true',
     {useNewUrlParser:true});
 
 //Order Routes
