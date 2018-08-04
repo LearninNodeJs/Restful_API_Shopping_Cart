@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
 
 app.use(function(req,res,next){
    res.header("Access-Control-Allow-Origin","*");
@@ -15,8 +17,10 @@ app.use(function(req,res,next){
    next();
 });
 
-const productRoutes = require('./api/routes/product');
-const orderRoutes = require('./api/routes/order');
+const productRoutes = require('./api/routes/products');
+const orderRoutes = require('./api/routes/orders');
+mongoose.connect('mongodb+srv://admin:wamatu@restapi-kvyex.mongodb.net/test?retryWrites=true',
+    {useNewUrlParser:true});
 
 //Order Routes
 app.use(morgan('dev'));
