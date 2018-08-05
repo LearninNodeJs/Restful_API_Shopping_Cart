@@ -6,11 +6,25 @@ const mongoose = require('mongoose');
 
 router.get('/',function(req,res,next){
    Product.find()
+       .select('name price _id')
        .exec()
        .then(docs => {
            if(docs.length>=0){
-               console.log(docs);
-               res.status(200).json(docs);
+               const response ={
+                    count: docs.length,
+                    products:docs.map(doc => {
+                        return {
+                            name:doc.name,
+                            price:doc.price,
+                            _id:doc._id,
+                            request:{
+                                type: 'GET',
+                                url:'http://localhost:3000/api/v1/products/'+doc._id
+                            }
+                        }
+                    })
+               };
+               res.status(200).json(response);
            }else{
                res.status(404).json({
                   message: 'No Entries Found'
@@ -22,8 +36,6 @@ router.get('/',function(req,res,next){
           console.log(err);
           res.status(500).json({error:err});
        });
-
-
 });
 
 router.post('/',(req,res,next)=>{
@@ -32,7 +44,6 @@ router.post('/',(req,res,next)=>{
         name:req.body.name,
         price:req.body.price
     });
-
    productItem.save(function (error,doc) {
       if(error){
           console.log(error.message);
@@ -44,7 +55,15 @@ router.post('/',(req,res,next)=>{
           console.log(doc);
           return res.status(200).json({
               message:'Handling Post Requests to /Products',
-              createdProduct:doc
+              createdProduct:{
+                  name:doc.name,
+                  price:doc.price,
+                  id:doc._id,
+                  request:{
+                      type:'POST',
+                      url:'http://localhost:3000/api/v1/products/'+doc.url
+                  }
+              }
           });
       }
       return res.status(404).json({message: 'Invalid Id'});
@@ -90,7 +109,13 @@ router.patch('/:productId',function(req,res,next){
    Product.update({_id:id},{$set:updateOps}).exec()
        .then(result => {
             console.log(result);
-            res.status(200).json(result);
+            res.status(200).json({
+                updatedProduct:result,
+                request:{
+                    type: 'GET',
+                    url:'http://localhost:3000/api/v1/products/'+id
+                }
+            });
        })
        .catch(error =>{
            console.log(error);
@@ -99,21 +124,3 @@ router.patch('/:productId',function(req,res,next){
 
 });
 module.exports = router;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

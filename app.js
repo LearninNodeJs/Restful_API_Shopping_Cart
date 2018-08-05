@@ -3,6 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 
 app.use(function(req,res,next){
@@ -19,7 +20,7 @@ app.use(function(req,res,next){
 
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
-mongoose.connect('mongodb+srv://admin:wamatu@restapi-kvyex.mongodb.net/ShopApi?retryWrites=true',
+mongoose.connect("mongodb+srv://admin:"+process.env.MONGO_ATLAS+"@restapi-kvyex.mongodb.net/ShopApi?retryWrites=true",
     {useNewUrlParser:true});
 
 //Order Routes
