@@ -28,7 +28,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use('/api/v1/products',productRoutes);
-app.use('/orders',orderRoutes);
+app.use('/api/v1/orders',orderRoutes);
 
 
 /*Error Handlers*/
