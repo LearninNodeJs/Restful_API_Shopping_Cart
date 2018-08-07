@@ -20,7 +20,7 @@ router.get('/',function(req,res,next){
                      quantity: results.quantity,
                      request:{
                         type: 'GET',
-                        url:'http://localhost:3000/api/v1/orders/'+results._id
+                        url:'https://frozen-garden-96255.herokuapp.com/api/v1/orders/'+results._id
                      }
                   }
                 })
@@ -51,7 +51,7 @@ router.post('/',function(req,res,next){
                            result,
                            request:{
                               type:'GET',
-                              url:'http://localhost:3000/api/v1/orders/'+result._id
+                              url:'https://frozen-garden-96255.herokuapp.com/api/v1/orders/'+result._id
                            }
                        }
                    });
@@ -85,7 +85,7 @@ router.get('/:productId',function(req,res,next){
                 order:order,
                 request:{
                    type:'GET',
-                   url:'http://localhost:3000/api/v1/orders/'+order._id
+                   url:'https://frozen-garden-96255.herokuapp.com/api/v1/orders/'+order._id
                 }
 
             });

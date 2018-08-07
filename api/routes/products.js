@@ -47,8 +47,8 @@ router.get('/',function(req,res,next){
                             _id:doc._id,
                             request:{
                                 type: 'GET',
-                                url:'http://localhost:3000/api/v1/products/'+doc._id,
-                                imageurl:'http://localhost:3000/api/v1/'+doc.productImage
+                                url:'https://frozen-garden-96255.herokuapp.com/'+doc._id,
+                                imageurl:'https://frozen-garden-96255.herokuapp.com/api/v1/'+doc.productImage
                             }
                         }
                     })
@@ -92,7 +92,7 @@ router.post('/',upload.single('productImage'),(req,res,next)=>{
                   id:doc._id,
                   request:{
                       type:'POST',
-                      url:'http://localhost:3000/api/v1/products/'+doc.url
+                      url:'https://frozen-garden-96255.herokuapp.com/api/v1/products/'+doc.url
                   }
               }
           });
@@ -144,7 +144,7 @@ router.patch('/:productId',function(req,res,next){
                 updatedProduct:result,
                 request:{
                     type: 'GET',
-                    url:'http://localhost:3000/api/v1/products/'+id
+                    url:'https://frozen-garden-96255.herokuapp.com/api/v1/products/'+id
                 }
             });
        })
