@@ -48,7 +48,7 @@ router.get('/',function(req,res,next){
                             request:{
                                 type: 'GET',
                                 url:'https://frozen-garden-96255.herokuapp.com/'+doc._id,
-                                imageurl:'https://frozen-garden-96255.herokuapp.com/api/v1/'+doc.productImage
+                                imageurl:'https://frozen-garden-96255.herokuapp.com/'+doc.productImage
                             }
                         }
                     })
