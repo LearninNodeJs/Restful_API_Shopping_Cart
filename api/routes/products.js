@@ -92,7 +92,7 @@ router.post('/',upload.single('productImage'),(req,res,next)=>{
                   id:doc._id,
                   request:{
                       type:'POST',
-                      url:'https://frozen-garden-96255.herokuapp.com/api/v1/products/'+doc.url
+                      url:'https://frozen-garden-96255.herokuapp.com/products/'+doc.url
                   }
               }
           });

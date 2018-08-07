@@ -25,7 +25,7 @@ mongoose.connect("mongodb+srv://admin:"+process.env.MONGO_ATLAS+"@restapi-kvyex.
 
 //Order Routes
 app.use(morgan('dev'));
-app.use('/api/v1/uploads',express.static('uploads'));
+app.use('/uploads',express.static('uploads'));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use('/api/v1/products',productRoutes);
