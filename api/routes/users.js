@@ -66,7 +66,7 @@ router.post('/signup',function(req,res,next){
         });
 });
 router.delete('/:userEmail',function(req,res,next){
-   const email = req.params.userEmail;
+    const email = req.params.userEmail;
     User.find({email:req.params.userEmail}).exec()
         .then(result =>{
             if(result.length>0){
@@ -95,6 +95,30 @@ router.delete('/:userEmail',function(req,res,next){
              });
         });
 
+});
+router.get('/:userEmail',function(req,res,next){
+   const userEmail = req.params.userEmail;
+   User.find({email:userEmail}).exec()
+       .then(result =>{
+            if(result.length>0){
+                res.status(201).json({
+                   message:'User Found',
+                    result
+
+                });
+            }else{
+                res.status(404).json({
+                   message:'User Not Found, Email does not exist'
+                });
+            }
+       })
+       .catch(error=>{
+           res.status(500).json({
+                message:'Error Encountered Fetching User Email',
+               error:error.message
+
+           });
+       })
 });
 
 module.exports = router;
