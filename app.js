@@ -20,6 +20,7 @@ app.use(function(req,res,next){
 
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
+const userRoutes = require('./api/routes/users');
 mongoose.connect("mongodb+srv://admin:"+process.env.MONGO_ATLAS+"@restapi-kvyex.mongodb.net/ShopApi?retryWrites=true",
     {useNewUrlParser:true});
 
@@ -30,6 +31,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use('/api/v1/products',productRoutes);
 app.use('/api/v1/orders',orderRoutes);
+app.use('/api/v1/users',userRoutes);
 
 
 /*Error Handlers*/

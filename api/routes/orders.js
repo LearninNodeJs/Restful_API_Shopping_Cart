@@ -85,7 +85,7 @@ router.get('/:productId',function(req,res,next){
                 order:order,
                 request:{
                    type:'GET',
-                   url:'https://frozen-garden-96255.herokuapp.com/api/v1/orders/'+order._id
+                   url:'https://frozen-garden-96255.herokuapp.com./api/v1/orders/'+order._id
                 }
 
             });
