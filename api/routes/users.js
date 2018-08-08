@@ -22,6 +22,40 @@ router.get('/allusers',function(req,res,next){
         });
 });
 
+
+router.post('/login',function(req,res,next){
+   User.find({email:req.body.email})
+       .exec()
+       .then(users=>{
+           if(users.length<1){
+               return res.status(401).json({
+                   message:'Authentication Failed!'
+               });
+           }
+           bcrypt.compare(req.body.password,users[0].password,function(err,response){
+              if(err){
+                  return res.status(401).json({
+                     message:'Authentication Failed'
+                  });
+              }
+              if(response){
+                  res.status(200).json({
+                     message:'Authentication Success',
+                     users
+                  });
+              }
+           });
+
+       })
+       .catch(error => {
+           res.status(500).json({
+               message:'Error Handling Find Method',
+               error:error.message
+           })
+       });
+});
+
+
 router.post('/signup',function(req,res,next){
     User.find({email:req.body.email}).exec()
         .then(result=>{
