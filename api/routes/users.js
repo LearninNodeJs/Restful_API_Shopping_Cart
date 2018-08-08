@@ -3,6 +3,9 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
 
 router.get('/allusers',function(req,res,next){
     User.find()
@@ -39,9 +42,16 @@ router.post('/login',function(req,res,next){
                   });
               }
               if(response){
+               const token =  jwt.sign({
+                     email:users[0].email,
+                     userId:users[0]._id
+                  }, process.env.JWT_KEY,{
+                      expiresIn: "1h"
+                  });
                   res.status(200).json({
                      message:'Authentication Success',
-                     users
+                     users,
+                      token:token
                   });
               }
            });
