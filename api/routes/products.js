@@ -3,6 +3,8 @@ const router = express.Router();
 const Product = require('../models/product');
 const mongoose = require('mongoose');
 const multer = require('multer');
+const checkAuth = require('../middleware/check-auth');
+
 
 const storage = multer.diskStorage({
    destination:function(req, file,cb){
@@ -67,7 +69,7 @@ router.get('/',function(req,res,next){
        });
 });
 
-router.post('/',upload.single('productImage'),(req,res,next)=>{
+router.post('/',checkAuth,upload.single('productImage'),(req,res,next)=>{
     console.log(req.file);
     const productItem =new Product({
         _id:new mongoose.Types.ObjectId(),
@@ -102,7 +104,7 @@ router.post('/',upload.single('productImage'),(req,res,next)=>{
 
 });
 
-router.get('/:productId',function(req,res,next){
+router.get('/:productId',checkAuth,function(req,res,next){
    const productID = req.params.productId;
 
    Product.findById(productID,function(error,docs){
@@ -119,7 +121,7 @@ router.get('/:productId',function(req,res,next){
     });
 });
 
-router.delete('/:productId',function(req,res,next){
+router.delete('/:productId',checkAuth,function(req,res,next){
    const id = req.params.productId;
    Product.remove({_id:id}).exec()
        .then(result =>{
@@ -131,7 +133,7 @@ router.delete('/:productId',function(req,res,next){
 
 });
 
-router.patch('/:productId',function(req,res,next){
+router.patch('/:productId',checkAuth,function(req,res,next){
    const id = req.params.productId;
    const updateOps = {};
    for(const ops of req.body){
