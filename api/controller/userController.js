@@ -4,6 +4,7 @@ const bcrypt  = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+
 exports.displayAllUsers = function(req,res,next){
     User.find()
         .select('_id email password')
@@ -21,6 +22,8 @@ exports.displayAllUsers = function(req,res,next){
             });
         });
 };
+
+
 exports.loginUser = function(req,res,next){
     User.find({email:req.body.email})
         .exec()
@@ -59,6 +62,7 @@ exports.loginUser = function(req,res,next){
             })
         });
 };
+
 exports.signUpUser = function(req,res,next){
 
     User.find({email:req.body.email}).exec()
@@ -103,6 +107,8 @@ exports.signUpUser = function(req,res,next){
             });
         });
 };
+
+
 exports.deleteUserByEmail = function(req,res,next){
     const email = req.params.userEmail;
     User.find({email:req.params.userEmail}).exec()
@@ -133,6 +139,8 @@ exports.deleteUserByEmail = function(req,res,next){
             });
         });
 };
+
+
 exports.getUserByMail = function(req,res,next){
     const userEmail = req.params.userEmail;
     User.find({email:userEmail}).exec()
